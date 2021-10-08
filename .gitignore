@@ -1,0 +1,7 @@
+__pycache__
+
+*.csv
+*.docx
+
+tutorial.py
+venv/

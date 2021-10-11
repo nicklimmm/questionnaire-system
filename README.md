@@ -1,6 +1,6 @@
 # Run Dev
 
 ```bash
-cd api
+cd app
 uvicorn main:app --reload
 ```

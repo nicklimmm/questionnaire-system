@@ -18,10 +18,6 @@ class QuestionUpdate(QuestionCreate, metaclass=AllOptional):
     pass
 
 
-class QuestionDelete(BaseModel):
-    id: int
-
-
 class Question(QuestionCreate):
     id: int
 

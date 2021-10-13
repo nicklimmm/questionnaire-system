@@ -1,4 +1,4 @@
-from typing import Any, Dict, Generic, List, Optional, Type, TypeVar, Union
+from typing import Any, Generic, List, Optional, Type, TypeVar
 
 from database.session import Base
 from fastapi.encoders import jsonable_encoder
@@ -45,7 +45,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         obj_in_data = jsonable_encoder(obj_in)
 
         # Only update for given fields
-        for key, value in vars(obj_in_data).items():
+        for key, value in obj_in_data.items():
             setattr(db_obj, key, value) if value else None
 
         db.add(db_obj)

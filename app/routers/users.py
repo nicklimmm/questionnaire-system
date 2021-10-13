@@ -15,13 +15,13 @@ def get_users(db: Session = Depends(get_db)):
     return crud_users.get_all(db)
 
 
-@router.get("/{user_id}", response_model=schema.User)
-def get_user(user_id: int, db: Session = Depends(get_db)):
-    db_user = crud_users.get(db, user_id)
+@router.get("/{id}", response_model=schema.User)
+def get_user(id: int, db: Session = Depends(get_db)):
+    db_user = crud_users.get(db, id)
     if db_user is None:
         raise HTTPException(
             status_code=404,
-            detail=f"User with id of {user_id} not found."
+            detail=f"User with id of {id} not found."
         )
     return db_user
 
@@ -31,23 +31,23 @@ def add_user(user: schema.UserCreate, db: Session = Depends(get_db)):
     return crud_users.create(db, user)
 
 
-@router.patch("/{user_id}", response_model=schema.User)
-def update_user(user_id: int, user: schema.UserUpdate, db: Session = Depends(get_db)):
-    db_user = crud_users.update(db, user_id, user)
+@router.patch("/{id}", response_model=schema.User)
+def update_user(id: int, user: schema.UserUpdate, db: Session = Depends(get_db)):
+    db_user = crud_users.update(db, id, user)
     if db_user is None:
         raise HTTPException(
             status_code=404,
-            detail=f"User with id of {user_id} not found."
+            detail=f"User with id of {id} not found."
         )
     return db_user
 
 
-@router.delete("/{user_id}", response_model=schema.User)
-def delete_user(user_id: int, db: Session = Depends(get_db)):
-    db_user = crud_users.delete(db, user_id)
+@router.delete("/{id}", response_model=schema.User)
+def delete_user(id: int, db: Session = Depends(get_db)):
+    db_user = crud_users.delete(db, id)
     if db_user is None:
         raise HTTPException(
             status_code=404,
-            detail=f"User with id of {user_id} not found."
+            detail=f"User with id of {id} not found."
         )
     return db_user

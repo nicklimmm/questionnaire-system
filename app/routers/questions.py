@@ -15,13 +15,13 @@ def get_questions(db: Session = Depends(get_db)):
     return crud_questions.get_all(db)
 
 
-@router.get("/{question_id}", response_model=schema.Question)
-def get_question(question_id: int, db: Session = Depends(get_db)):
-    db_question = crud_questions.get(db, question_id)
+@router.get("/{id}", response_model=schema.Question)
+def get_question(id: int, db: Session = Depends(get_db)):
+    db_question = crud_questions.get(db, id)
     if db_question is None:
         raise HTTPException(
             status_code=404,
-            detail=f"Question with id of {question_id} not found."
+            detail=f"Question with id of {id} not found."
         )
     return db_question
 
@@ -31,23 +31,23 @@ def add_question(question: schema.QuestionCreate, db: Session = Depends(get_db))
     return crud_questions.create(db, question)
 
 
-@router.patch("/{question_id}", response_model=schema.Question)
-def update_question(question_id: int, question: schema.QuestionUpdate, db: Session = Depends(get_db)):
-    db_question = crud_questions.update(db, question_id, question)
+@router.patch("/{id}", response_model=schema.Question)
+def update_question(id: int, question: schema.QuestionUpdate, db: Session = Depends(get_db)):
+    db_question = crud_questions.update(db, id, question)
     if db_question is None:
         raise HTTPException(
             status_code=404,
-            detail=f"Question with id of {question_id} not found."
+            detail=f"Question with id of {id} not found."
         )
     return db_question
 
 
-@router.delete("/{question_id}", response_model=schema.Question)
-def delete_question(question_id: int, db: Session = Depends(get_db)):
-    db_question = crud_questions.delete(db, question_id)
+@router.delete("/{id}", response_model=schema.Question)
+def delete_question(id: int, db: Session = Depends(get_db)):
+    db_question = crud_questions.delete(db, id)
     if db_question is None:
         raise HTTPException(
             status_code=404,
-            detail=f"Question with id of {question_id} not found."
+            detail=f"Question with id of {id} not found."
         )
     return db_question

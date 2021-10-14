@@ -14,7 +14,7 @@ class QuestionCreate(BaseModel):
     type: QuestionType
 
 
-class QuestionUpdate(QuestionCreate, metaclass=AllOptional):
+class QuestionUpdate(BaseModel):
     pass
 
 

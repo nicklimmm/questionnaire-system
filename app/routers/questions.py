@@ -31,17 +31,6 @@ def add_question(question: schema.QuestionCreate, db: Session = Depends(get_db))
     return crud_questions.create(db, question)
 
 
-@router.patch("/{id}", response_model=schema.Question)
-def update_question(id: int, question: schema.QuestionUpdate, db: Session = Depends(get_db)):
-    db_question = crud_questions.update(db, id, question)
-    if db_question is None:
-        raise HTTPException(
-            status_code=404,
-            detail=f"Question with id of {id} not found."
-        )
-    return db_question
-
-
 @router.delete("/{id}", response_model=schema.Question)
 def delete_question(id: int, db: Session = Depends(get_db)):
     db_question = crud_questions.delete(db, id)

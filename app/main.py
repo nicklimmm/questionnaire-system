@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import questions, users
+from routers import questions, users, choices
 from database.session import engine
 from database import models
 
@@ -11,6 +11,7 @@ app = FastAPI()
 
 app.include_router(questions.router)
 app.include_router(users.router)
+app.include_router(choices.router)
 
 
 @app.get("/")

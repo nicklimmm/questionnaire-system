@@ -1,7 +1,9 @@
-from sqlalchemy import create_engine
+from datetime import datetime
+
+from sqlalchemy import create_engine, event
+from sqlalchemy.engine import Engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from datetime import datetime
 
 # Fake timer for testing convenience
 NOW = datetime.utcnow()
@@ -22,3 +24,10 @@ def get_db():
         yield db
     finally:
         db.close()
+
+# Enable foreign key support
+@event.listens_for(Engine, "connect")
+def set_sqlite_pragma(dbapi_connection, connection_record):
+    cursor = dbapi_connection.cursor()
+    cursor.execute("PRAGMA foreign_keys=ON")
+    cursor.close()

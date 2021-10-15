@@ -1,6 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
-from database.models import Question, User
+from database.models import Question, User, Choice
 from database.session import Base, get_db
 from main import app
 from sqlalchemy import create_engine
@@ -41,7 +41,7 @@ def setup_db():
 
 
 def delete_all(db):
-    # db.query(Choice).delete()
+    db.query(Choice).delete()
     db.query(Question).delete()
     # db.query(Response).delete()
     db.query(User).delete()

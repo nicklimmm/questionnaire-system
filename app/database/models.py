@@ -28,15 +28,17 @@ class Question(Base):
     # TODO Add enums
     type = Column(String, nullable=False)
 
-    choices = relationship("Choice", back_populates="question")
+    choices = relationship("Choice", back_populates="question",
+                           cascade="all, delete", passive_deletes=True)
 
 
 class Choice(Base):
     __tablename__ = "choices"
 
     id = Column(Integer, primary_key=True, index=True)
-    question_id = Column(Integer, ForeignKey("questions.id"))
-    choice = Column(String, nullable=False)
+    question_id = Column(Integer, ForeignKey(
+        "questions.id", ondelete="CASCADE"))
+    description = Column(String, nullable=False)
 
     question = relationship("Question", back_populates="choices")
     users = relationship("User", secondary=responses, back_populates="choices")

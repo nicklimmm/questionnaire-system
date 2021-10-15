@@ -77,17 +77,24 @@ def test_delete():
     }
 
     response = client.get("/questions/")
+    assert response.status_code == 200
     assert response.json() == []
 
 
 def test_get_invalid_id():
     response = client.get("/questions/999")
     assert response.status_code == 404
+    assert response.json() == {
+        "detail": "Question with id of 999 not found"
+    }
 
 
 def test_delete_invalid_id():
     response = client.get("/questions/999")
     assert response.status_code == 404
+    assert response.json() == {
+        "detail": "Question with id of 999 not found"
+    }
 
 
 def test_post_invalid_type():
@@ -96,4 +103,4 @@ def test_post_invalid_type():
         "description": "question1"
     })
 
-    assert response.status_code != 200
+    assert response.status_code == 422

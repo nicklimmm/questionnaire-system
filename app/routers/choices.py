@@ -22,7 +22,7 @@ def get_choice(id: int, db: Session = Depends(get_db)):
     if db_choice is None:
         raise HTTPException(
             status_code=404,
-            detail=f"Choice with id of {id} not found."
+            detail=f"Choice with id of {id} not found"
         )
     return db_choice
 
@@ -49,6 +49,6 @@ def delete_choice(id: int, db: Session = Depends(get_db)):
         raise HTTPException(
 
             status_code=404,
-            detail=f"Choice with id of {id} not found."
+            detail=f"Choice with id of {id} not found"
         )
     return db_choice

@@ -21,7 +21,7 @@ def get_question(id: int, db: Session = Depends(get_db)):
     if db_question is None:
         raise HTTPException(
             status_code=404,
-            detail=f"Question with id of {id} not found."
+            detail=f"Question with id of {id} not found"
         )
     return db_question
 
@@ -37,6 +37,6 @@ def delete_question(id: int, db: Session = Depends(get_db)):
     if db_question is None:
         raise HTTPException(
             status_code=404,
-            detail=f"Question with id of {id} not found."
+            detail=f"Question with id of {id} not found"
         )
     return db_question

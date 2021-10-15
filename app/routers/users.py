@@ -21,7 +21,7 @@ def get_user(id: int, db: Session = Depends(get_db)):
     if db_user is None:
         raise HTTPException(
             status_code=404,
-            detail=f"User with id of {id} not found."
+            detail=f"User with id of {id} not found"
         )
     return db_user
 
@@ -37,7 +37,7 @@ def update_user(id: int, user: schema.UserUpdate, db: Session = Depends(get_db))
     if db_user is None:
         raise HTTPException(
             status_code=404,
-            detail=f"User with id of {id} not found."
+            detail=f"User with id of {id} not found"
         )
     return db_user
 
@@ -48,6 +48,6 @@ def delete_user(id: int, db: Session = Depends(get_db)):
     if db_user is None:
         raise HTTPException(
             status_code=404,
-            detail=f"User with id of {id} not found."
+            detail=f"User with id of {id} not found"
         )
     return db_user

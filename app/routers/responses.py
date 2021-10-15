@@ -22,7 +22,7 @@ def get_response(id: int, db: Session = Depends(get_db)):
     if db_response is None:
         raise HTTPException(
             status_code=404,
-            detail=f"Response with id of {id} not found."
+            detail=f"Response with id of {id} not found"
         )
     return db_response
 
@@ -48,7 +48,7 @@ def edit_response(id: int, response: schema.ResponseUpdate, db: Session = Depend
     if db_response is None:
         raise HTTPException(
             status_code=404,
-            detail=f"Response with id of {id} not found."
+            detail=f"Response with id of {id} not found"
         )
 
     elif type(db_response) == Response:
@@ -68,6 +68,6 @@ def delete_question(id: int, db: Session = Depends(get_db)):
     if db_response is None:
         raise HTTPException(
             status_code=404,
-            detail=f"Response with id of {id} not found."
+            detail=f"Response with id of {id} not found"
         )
     return db_response

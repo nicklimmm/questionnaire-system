@@ -97,12 +97,3 @@ def test_post_invalid_type():
     })
 
     assert response.status_code != 200
-
-
-def test_post_empty_description():
-    response = client.post("/questions/", json={
-        "type": "unknown",
-        "description": ""
-    })
-
-    assert response.status_code != 200

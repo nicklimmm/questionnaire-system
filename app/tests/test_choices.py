@@ -1,5 +1,4 @@
 from tests.conftest import client
-from pydantic import ValidationError
 
 
 def test_post():

@@ -43,7 +43,7 @@ def add_choice(choice: schema.ChoiceCreate, db: Session = Depends(get_db)):
 
 
 @router.delete("/{id}", response_model=schema.Choice)
-def delete_question(id: int, db: Session = Depends(get_db)):
+def delete_choice(id: int, db: Session = Depends(get_db)):
     db_choice = crud_choices.delete(db, id)
     if db_choice is None:
         raise HTTPException(

@@ -21,14 +21,14 @@ class CRUDChoice(CRUDBase[Choice, ChoiceCreate, ChoiceUpdate]):
         db_question = db.query(Question).filter(
             Question.id == question_id).first()
 
-        # Prevent creation if the question does not exist
+        # If question not found
         if db_question is None:
             return {
-                "msg": f"Question with id of {question_id} does not exist"
+                "msg": f"Question with id of {question_id} not found"
             }
 
-        # Prevent creation if the question has a type of text
-        if db_question.type == "text":
+        # If the question has a type of text
+        if db_question.type == "textbox":
             return {
                 "msg": f"The type of question with id of {question_id} is a text"
             }

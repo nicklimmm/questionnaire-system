@@ -1,6 +1,6 @@
 # Questionnaire System REST API
 
-A questionnaire system to manage and collect responses from users. Allows basic CRUD interactions, allowing users to answer each question, view the questions that they have answered, and edit their answers even after submitting them.
+A questionnaire system to manage and collect responses from users. Allowing users to answer each question, view the questions that they have answered, and edit their answers even after submitting them.
 
 ## Tools Used
 

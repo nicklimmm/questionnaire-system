@@ -25,7 +25,7 @@ def test_post_invalid_question():
     }
 
 
-def test_invalid_user():
+def test_post_invalid_user():
     response = client.post(
         "/responses/", json={"question_id": 1, "user_id": 10, "text": "text"})
 
@@ -35,7 +35,7 @@ def test_invalid_user():
     }
 
 
-def test_invalid_choice():
+def test_post_invalid_choice():
     # Choice does not belong to the correct question
     response = client.post(
         "/responses/", json={"question_id": 2, "user_id": 1, "choice_id": 1})
@@ -61,7 +61,7 @@ def test_invalid_choice():
     }
 
 
-def test_no_text_nor_choice():
+def test_post_no_text_nor_choice():
     response = client.post(
         "/responses/", json={"question_id": 1, "user_id": 1})
     assert response.status_code == 400
@@ -70,7 +70,7 @@ def test_no_text_nor_choice():
     }
 
 
-def test_response_on_delete_cascade():
+def test_post_response_on_delete_cascade():
     client.post("/responses/",
                 json={"question_id": 1, "user_id": 1, "choice_id": 1})
     client.post("/responses/",

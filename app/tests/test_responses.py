@@ -116,6 +116,25 @@ def test_patch():
     }
 
 
+def test_patch_invalid():
+    client.post("/responses/",
+                json={"question_id": 1, "user_id": 1, "choice_id": 1})
+
+    # Choice does not belong to the question
+    response = client.patch("/responses/1", json={"choice_id": 2})
+    assert response.status_code == 400
+    assert response.json() == {
+        "detail": "Choice with id of 2 does not belong to question with id of 1"
+    }
+
+    # Text is given to a choice-based question
+    response = client.patch("/responses/1", json={"text": "edited text"})
+    assert response.status_code == 400
+    assert response.json() == {
+        "detail": "Question with id of 1 is not of type text"
+    }
+
+
 def test_post_invalid_question():
     response = client.post(
         "/responses/", json={"question_id": 10, "user_id": 1, "text": "text"})

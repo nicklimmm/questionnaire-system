@@ -85,19 +85,19 @@ class CRUDResponse(CRUDBase[Response, ResponseCreate, ResponseUpdate]):
         response_data = jsonable_encoder(response)
 
         # Text is provided for a non-text question
-        if db_response.text is None and response_data.text is not None:
+        if db_response.text is None and response_data["text"] is not None:
             return {
                 "msg": f"Question with id of {db_response.question_id} is not of type text"
             }
 
         # Choice is provided for a text question
-        if db_response.text is not None and response_data.choice_id is not None:
+        if db_response.text is not None and response_data["choice_id"] is not None:
             return {
                 "msg": f"Question with id of {db_response.question_id} is of type text"
             }
 
-        if response_data.choice_id is not None:
-            choice_id = response_data.choice_id
+        if response_data["choice_id"] is not None:
+            choice_id = response_data["choice_id"]
             db_choice = db.query(Choice).filter(Choice.id == choice_id).first()
 
             # Choice not found
@@ -114,12 +114,12 @@ class CRUDResponse(CRUDBase[Response, ResponseCreate, ResponseUpdate]):
 
         # Only update for given fields
         for key, value in response_data.items():
-            setattr(response, key, value) if value else None
+            setattr(db_response, key, value) if value else None
 
-        db.add(response)
+        db.add(db_response)
         db.commit()
-        db.refresh(response)
-        return response
+        db.refresh(db_response)
+        return db_response
 
 
 crud_responses = CRUDResponse(Response)
